@@ -2,6 +2,7 @@ from pprint import pprint # pretty print output formatting
 from question1 import (common_words, common_words_min, common_words_tuple,
     common_words_safe)
 from question2 import parse_links_regex, parse_links_xpath
+from question3 import *
 from question4 import GITHUB_URL
 # fill in the rest!
 
@@ -25,18 +26,23 @@ print "common_words_safe... ",
 pprint(common_words_safe("words_fail.txt", 5))
 print
 
-
 print "==testing question 2=="
 print "regex... ",
-pprint(parse_links_regex("crimson.html"))
-pprint(parse_links_xpath("crimson.html"))
+#pprint(parse_links_regex("crimson.html"))
+#pprint(parse_links_xpath("crimson.html"))
 print
-
 
 print "==testing question 3=="
-# ???
-print
+eamon = Person("Eamon", "M")
+jim = Person("Jim", "M")
+pam = Person("Pam", "F")
+print eamon.name
+hogwarts = Building((8,9))
+print hogwarts.coordinates
+hogwarts.enter(eamon, 19)
+print hogwarts.persons[0].name
 
+"""
 
 print "==testing question 4=="
 print "github url: {}".format(GITHUB_URL)
@@ -46,3 +52,5 @@ print
 print "==testing question 5=="
 # ???
 print
+
+"""

@@ -17,9 +17,6 @@ def fizzbuzz():
         else:
             print x
 
-# test run
-fizzbuzz()
-
 # 3. Write a function that takes one string argument and returns that string with the most common letter swapped with the least common letter.
 
 def swapchars(phrase):
@@ -53,10 +50,6 @@ def swapchars(phrase):
             newstring += char
     print newstring
 
-# test run
-swapchars("There were a lot of escopeoples in the elevator on Tuesday.")
-
-
 # 4. Write a function that will take a number n followed by an arbitrary number of string arguments and return the concatenation of the longest n arguments from longest to shortest. If n is -1, concatenate all of the arguments in this fashion. (Optional: Try passing a non-string argument after the first one. What happens? What are some ways to handle this gracefully?)
 
 def sortcat(num, *args):
@@ -73,10 +66,6 @@ def sortcat(num, *args):
             num -= 1
     print longstring
 
-# tests
-sortcat(1, 'abc', 'bc')
-sortcat(2, 'bc', 'c', 'abc')
-
 # 5b. Write a Python function that simulates this approach to the Look Away minigame, assuming that Luigi always looks forward and that Mario, Wario, and Peach each randomly choose to look either forward, up, down, left, or right with uniform probability. Your function should take a number of trials to run as input and return the fraction of trials on which Luigi won. You will probably find the random module <http://docs.python.org/library/random.html> useful.
 import random
 import fractions
@@ -86,22 +75,30 @@ def minigame(num):
     wins = 0
     # set luigi by default to look forward
     luigi = 1
+      
     for trial in range(0, num):
-        # make characters randomly look a direction
-        mario = random.randint(1, 5)
-        wario = random.randint(1, 5)
-        peach = random.randint(1, 5)
-        # check if any characters looked forward like Luigi
-        if luigi == mario or luigi == wario or luigi == peach:
+        i = 0
+        m = False
+        w = False
+        p = False
+        while ((m == False or w == False or p == False) and i < 5):
+            # make characters randomly look a direction
+            mario = random.randint(1, 5)
+            wario = random.randint(1, 5)
+            peach = random.randint(1, 5)
+            if luigi == mario:
+                m = True
+            if luigi == wario:
+                w = True
+            if luigi == peach:
+                p = True
+            i += 1
+        if (m == True and w == True and p == True):
             wins += 1
     print "Luigi won %i out of the %i games" % (wins, num)
 
     # alternate form of printing: 
     # print fractions.Fraction(numerator=wins, denominator=num)
-
-# tests
-minigame(5)
-minigame(100)
 
 # 8. a. Using the urllib and json modules, write a function that will get the data for the Quad -> Mass Ave/Garden trip and print out the times at which the next three shuttles will leave along with the number of minutes between each such time and the current time.
 
@@ -146,9 +143,3 @@ def shuttle():
     print "2nd Shuttle leaves at: %s, there are %i minutes left till it departs" % (b,math.fabs((int(currentmins)-int(bmins)) + (int(currenthours) - int(bhours))* 60))
     print "3rd Shuttle leaves at: %s, there are %i minutes left till it departs" % (c,math.fabs((int(currentmins)-int(cmins)) + (int(currenthours) - int(chours))* 60))
     print now.strftime("Current time: %H:%M:%S")
-
-# test
-shuttle()
-
-
-

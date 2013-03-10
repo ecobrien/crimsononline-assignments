@@ -40,13 +40,83 @@ g)  With a minimum of code duplication, modify the Building class so that
     chose to inherit any classes from Building (which you should have).
 """
 
+building_locations = {}
+
+def locate((x,y)):
+    if (x,y) in building_locations:
+        return building_locations[(x,y)]
+    else:
+        None
+
 class Person:
-    def __init__(self):
-        pass
+    def __init__(self, name, gender):
+        import string
+        if gender.upper() == "M" or gender.upper() == "F":
+            self.gender = gender.upper()
+        else:
+            raise ValuEError("Inappropriate gender.")
+        self.name = str.capitalize(name)
+
+        self.entered = False
+        self.room = None
 
 class Building:
-    def enter(self, person, room_no):
-        pass
+    def __init__(self, (x,y)):
+        if (x,y) in building_locations:
+            print "There is already a building at this location"
+        else:
+            self.coordinates = (x,y)
+        building_locations[(x,y)] = self
+        self.persons = []
 
+    def enter(self, person, room_no):
+        if person.entered:
+            print "This person is already in a building"
+        else:
+            person.entered = True
+            person.room = room_no
+            self.persons.append(person)
+    
     def where_is(self, person):
-        pass
+        if person.entered == False:
+            print "This person is not in a building."
+        else:
+            print "This person is in room {}".format(person.room)
+                
+    def __iter__(self):
+        return iter(self._person)
+
+    def __setitem__(self,room_no,person):
+        self.enter(person,room_no)
+
+class Office(Building):
+
+    def __init__(self, employees, (x,y)):
+        super(Office, self).__init__((x,y))
+        self.employees = employees
+    
+    def enter(self, person, room_no):
+        if person in self.employees:
+            super(Office, self).enter(person, room_no)
+        else:
+            print "This person is not an employee"
+
+class House(Building):
+    def __init__(self):
+        super(House, self).__init__()
+
+    def enter(self, person):
+        if person.entered:
+            print "This person is already in a building."
+        else:
+            self.persons.append(person)
+            person.entered = True
+
+    def where_is(self):
+        raise AttributeError( "House object has no attribute where_is" )
+
+    def at_home(self, person):
+        return person in self.persons
+
+    def __setitem__(self,key,person):
+        self.enter(person)

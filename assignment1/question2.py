@@ -39,10 +39,19 @@ def parse_links_xpath(filename):
     Which approach is better? (Hint: http://goo.gl/mzl9t)
     """
     
-    # I get an error when I import this that says: ImportError: No module named lxml.html
-    # However, I did in fact install it! Thus, I have not been able to test this code...
     from lxml import html
 
     input = lxml.html.parse(filename)
     links = input.xpath('//tr/td/a/text()')
-    print links
+    
+    dict = {}
+    
+    for line in input.iter("a"):
+        plaintext = line.text
+        url = line.get("href")
+        if plaintext in dict:
+            dict[plaintext] += " and " + url
+        else:
+            dict[plaintext] = url
+
+    return dict

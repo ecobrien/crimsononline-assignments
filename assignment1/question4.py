@@ -17,3 +17,6 @@ We just want to see that you can use the toolchain.
 """
 
 GITHUB_URL = "http://github.com/YOU/PROJECT"
+
+# Can I meet with Nikhil and Jobo to talk about this problem? I was having lots of issues and had a hard time getting
+# into the office to talk about them because of CS51 and general midterm madness. :( 

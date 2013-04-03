@@ -54,7 +54,7 @@ class Person:
         if gender.upper() == "M" or gender.upper() == "F":
             self.gender = gender.upper()
         else:
-            raise ValuEError("Inappropriate gender.")
+            raise ValueError("Inappropriate gender.")
         self.name = str.capitalize(name)
 
         self.entered = False

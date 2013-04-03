@@ -61,7 +61,7 @@ class Person:
         self.room = None
 
 class Building:
-    def __init__(self, coordinates, (x,y)):
+    def __init__(self, coordinates, persons, (x,y)):
         if (x,y) in building_locations:
             print "There is already a building at this location"
         else:
